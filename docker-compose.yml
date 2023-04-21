@@ -1,0 +1,41 @@
+version: '3'
+services:
+  back_end:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      db:
+        condition: service_healthy 
+
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dbcalendary
+      MYSQL_PASSWORD: root
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  pma:
+    image: phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+        PMA_HOST: db
+        PMA_USER: root
+        PMA_PASSWORD: root
+        PMA_PORT: 3306
+        UPLOAD_LIMIT: 300M
+    depends_on:
+      db:
+        condition: service_healthy
