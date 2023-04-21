@@ -10,7 +10,6 @@ class authController {
             const authUseCaseInstace = new authUseCase();
             const result = await authUseCaseInstace.execute({ email, password });
 
-            console.log(result)
             if(result.status === 200){
                 return res.status(200).json(result)
             } else if(result.status === 401){
@@ -20,7 +19,7 @@ class authController {
             }
 
         } catch (error) {
-            return res.json({error:'algo de errado'})
+            return res.json({error})
         }
     }
 }
