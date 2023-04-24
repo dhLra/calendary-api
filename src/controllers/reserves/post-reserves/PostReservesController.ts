@@ -6,7 +6,7 @@ class postReserveController {
     async handler(req: Request, res: Response) {
         try {
 
-            const { id_renter, event_name, start_date, final_date, total_amount, received_amount, create_by } = req.body;
+            const { id_renter, event_name, start_date, final_date, total_amount, received_amount,balance, observation, create_by } = req.body;
             const postReserveUseCaseInstace = new postReserveUseCase();
             const result = await postReserveUseCaseInstace.execute(
                 {
@@ -16,6 +16,8 @@ class postReserveController {
                     final_date,
                     total_amount,
                     received_amount,
+                    balance,
+                    observation,
                     create_by
                 });
 

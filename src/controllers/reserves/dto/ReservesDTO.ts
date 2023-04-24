@@ -5,5 +5,7 @@ export interface reserveDTO {
     final_date: Date,
     total_amount: number,
     received_amount: number,
+    balance: number,
+    observation: string,
     create_by: number,
 }

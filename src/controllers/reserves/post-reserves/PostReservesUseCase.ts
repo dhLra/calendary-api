@@ -8,7 +8,9 @@ export class postReserveUseCase {
             start_date,
             final_date,
             total_amount,
+            balance,
             received_amount,
+            observation,
             create_by }: reserveDTO) {
 
         const prisma = new PrismaClient();
@@ -20,7 +22,8 @@ export class postReserveUseCase {
                 final_date: new Date(final_date),
                 total_amount: total_amount,
                 received_amount: received_amount,
-                balance: total_amount - received_amount,
+                balance: balance + received_amount,
+                observation: observation,
                 create_by: create_by,
                 create_date: new Date()
             }
