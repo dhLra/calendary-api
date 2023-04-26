@@ -18,8 +18,8 @@ export class postReserveUseCase {
             data: {
                 id_renter: id_renter,
                 event_name: event_name,
-                start_date: new Date(start_date),
-                final_date: new Date(final_date),
+                start_date: start_date,
+                final_date: final_date,
                 total_amount: total_amount,
                 received_amount: received_amount,
                 balance: balance + received_amount,

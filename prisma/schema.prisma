@@ -18,20 +18,21 @@ model users {
 }
 
 model renters {
-  id          Int        @id @default(autoincrement())
-  name        String     @db.Text
-  cpnj        String     @db.Text
-  id_contact  Int?
-  create_date DateTime   @db.DateTime(0)
-  reserves    reserves[]
+  id            Int             @id @default(autoincrement())
+  name          String          @db.Text
+  cpnj          String          @db.Text
+  id_contact    Int?
+  create_date   DateTime        @db.DateTime(0)
+  renters_phone renters_phone[]
+  reserves      reserves[]
 }
 
 model reserves {
   id              Int      @id @default(autoincrement())
   id_renter       Int
   event_name      String   @db.Text
-  start_date      DateTime @db.Date
-  final_date      DateTime @db.Date
+  start_date      String   @db.Text
+  final_date      String   @db.Text
   total_amount    Float    @db.Float
   received_amount Float?   @db.Float
   balance         Float    @db.Float
@@ -61,4 +62,14 @@ model reserves_log {
   create_date     DateTime @db.DateTime(0)
 
   @@ignore
+}
+
+model renters_phone {
+  id          Int      @id @default(autoincrement())
+  id_renter   Int
+  phone       String   @db.Text
+  create_date DateTime @db.DateTime(0)
+  renters     renters  @relation(fields: [id_renter], references: [id], onUpdate: Restrict, map: "renters_phone_ibfk_1")
+
+  @@index([id_renter], map: "id_renter")
 }

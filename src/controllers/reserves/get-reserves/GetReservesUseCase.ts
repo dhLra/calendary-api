@@ -6,6 +6,7 @@ export class getReserveUseCase {
         const prisma = new PrismaClient();
         const allReserve = await prisma.reserves.findMany({
             select: {
+                id: true,
                 id_renter: true,
                 event_name: true,
                 start_date: true,
@@ -14,13 +15,23 @@ export class getReserveUseCase {
                 received_amount: true,
                 observation: true,
                 create_date: true,
+                renters: {
+                    select: {
+                        name: true,
+                        renters_phone: {
+                            select: {
+                                phone: true
+                            }
+                        }
+                    }
+                }
             }
         })
 
         if (!allReserve) {
             return { status: 400, message: "Something wrong happen" }
         } else {
-            return { status: 200, allReserve}
+            return { status: 200, allReserve }
         }
     }
 }
