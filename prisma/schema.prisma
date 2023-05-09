@@ -20,8 +20,8 @@ model users {
 model renters {
   id            Int             @id @default(autoincrement())
   name          String          @db.Text
-  cpnj          String          @db.Text
-  id_contact    Int?
+  cnpj          String          @db.Text
+  email         String          @db.Text
   create_date   DateTime        @db.DateTime(0)
   renters_phone renters_phone[]
   reserves      reserves[]
@@ -59,6 +59,7 @@ model reserves_log {
   id_reserve      Int
   id_payment_type Int
   amount          Float    @db.Float
+  create_by       Int
   create_date     DateTime @db.DateTime(0)
 
   @@ignore
