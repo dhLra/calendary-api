@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { postRenterRegisterUseCase } from "./PostRegisterUseCase";
-import { getReserveUseCase } from "../../reserves/get-reserves/GetReservesUseCase";
 
 class postRenterRegisterController {
     async handler(req: Request, res: Response) {

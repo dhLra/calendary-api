@@ -1,6 +1,6 @@
-export interface renterDTO{
+export interface renterDTO {
     renter_name: string,
     email: string,
     cnpj: string,
-    phone: string
+    phone?: any 
 }
