@@ -8,6 +8,6 @@ const getRenterControllerInstace = new getRenterController();
 
 router
     .post("/create", postRenterRegisterControllerInstace.handler)
-    .get("/find", getRenterControllerInstace.handler)
+    .post("/find", getRenterControllerInstace.handler)
 
 export default router

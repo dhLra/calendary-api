@@ -25,7 +25,6 @@ export class authUseCase {
             return { status: 404, message: "User not found" }
         } else {
             const isAuth = await bcrypt.compare(password, auth.password_hash)
-            console.log(isAuth)
             if (!isAuth) {
                 return { status: 401, message: "Aunauthorized" }
             } else {

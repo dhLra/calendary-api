@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { getRenterUseCase } from "./GetRenterUseCase";
+import { getReservesPoolUseCase } from "./GetReservesPoolUseCase";
 
-class getRenterController {
+class getReservesPoolController {
     async handler(req: Request, res: Response) {
         try {
             const data = req.body
+            const getReservesPoolUseCaseInstace = new getReservesPoolUseCase();
+            const result = await getReservesPoolUseCaseInstace.execute(data);
 
-            const getRenterUseCaseInstace = new getRenterUseCase();
-            const result = await getRenterUseCaseInstace.execute(data)
 
             if (result.status === 200) {
                 return res.status(result.status).json(result)
@@ -20,4 +20,4 @@ class getRenterController {
     }
 }
 
-export default getRenterController
+export default getReservesPoolController;

@@ -39,7 +39,8 @@ export class getRenterUseCase {
                     select: {
                         phone: true,
                     }
-                }
+                },
+                reserves: true
             }
         })
 

@@ -34,11 +34,12 @@ model reserves {
   start_date      String   @db.Text
   final_date      String   @db.Text
   total_amount    Float    @db.Float
-  received_amount Float?   @db.Float
+  received_amount Float    @default(0) @db.Float
   balance         Float    @db.Float
   observation     String?  @db.Text
   create_by       Int
   create_date     DateTime @db.DateTime(0)
+  status_flag     Boolean  @default(true)
   renters         renters  @relation(fields: [id_renter], references: [id], onUpdate: Restrict, map: "reserves_ibfk_1")
   users           users    @relation(fields: [create_by], references: [id], onUpdate: Restrict, map: "reserves_ibfk_2")
 
@@ -53,18 +54,6 @@ model payment_types {
   create_date  DateTime @db.DateTime(0)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
-model reserves_log {
-  id              Int
-  id_reserve      Int
-  id_payment_type Int
-  amount          Float    @db.Float
-  create_by       Int
-  create_date     DateTime @db.DateTime(0)
-
-  @@ignore
-}
-
 model renters_phone {
   id          Int      @id @default(autoincrement())
   id_renter   Int
@@ -73,4 +62,20 @@ model renters_phone {
   renters     renters  @relation(fields: [id_renter], references: [id], onUpdate: Restrict, map: "renters_phone_ibfk_1")
 
   @@index([id_renter], map: "id_renter")
+}
+
+model reserves_actions_log {
+  id          Int      @id @default(autoincrement())
+  id_reserve  Int
+  action      String   @db.Text
+  create_date DateTime @db.DateTime(0)
+}
+
+model reserves_payment_log {
+  id              Int      @id @default(autoincrement())
+  id_reserve      Int
+  id_payment_type Int
+  amount          Float    @db.Float
+  create_by       Int
+  create_date     DateTime @db.DateTime(0)
 }

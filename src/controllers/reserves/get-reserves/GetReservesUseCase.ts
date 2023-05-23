@@ -5,6 +5,9 @@ export class getReserveUseCase {
     async execute() {
         const prisma = new PrismaClient();
         const allReserve = await prisma.reserves.findMany({
+            where: {
+                status_flag: true,
+            },
             select: {
                 id: true,
                 id_renter: true,
