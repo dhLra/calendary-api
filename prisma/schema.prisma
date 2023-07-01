@@ -35,7 +35,7 @@ model reserves {
   final_date      String   @db.Text
   total_amount    Float    @db.Float
   received_amount Float    @default(0) @db.Float
-  balance         Float    @db.Float
+  balance         Float?   @db.Float
   observation     String?  @db.Text
   create_by       Int
   create_date     DateTime @db.DateTime(0)
